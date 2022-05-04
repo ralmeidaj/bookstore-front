@@ -13,6 +13,24 @@
     font-weight: 500;
 }
 
+.botaonovo{
+    padding-bottom: .8rem;
+}
+
 .table {
     width: 100%;
+}
+.livros{
+    color: rgb(172, 191, 231);
+    margin-left: .5rem;
+}
+.edit{
+    color: rgb(150, 149, 146);
+}
+.delete{
+    color: rgb(250, 208, 195);
+    margin-left: .5rem;
+}
+.mat-header{
+    width: 5rem;
 }
