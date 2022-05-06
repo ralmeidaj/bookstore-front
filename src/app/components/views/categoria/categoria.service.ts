@@ -34,10 +34,10 @@ export class CategoriaService {
     const url = `${this.baseUrl}/categorias/${id}`;
     return this.http.delete<void>(url);
   }
-  update(categoria: Categoria): Observable<void>{
+  update(categoria: Categoria): Observable<Categoria>{
     const url = `${this.baseUrl}/categorias/${categoria.id}`;
     //console.log(url);
-    return this.http.put<void>(url, categoria)
+    return this.http.put<Categoria>(url, categoria)
   }
 
   mensagem(str: String): void {
