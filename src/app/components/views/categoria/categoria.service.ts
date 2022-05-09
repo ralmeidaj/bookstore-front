@@ -14,9 +14,14 @@ export class CategoriaService {
 
   constructor(private http: HttpClient, private _snack: MatSnackBar) { }
 
-  findAll():Observable<Categoria[]>{
-    const url = `${this.baseUrl}/categorias`
+  findAll(page: String, size: String):Observable<Categoria[]>{
+    const url = `${this.baseUrl}/categorias?page=${page}&size=${size}`
     return this.http.get<Categoria[]>(url)
+  }
+
+  findAllCount(){
+    const url = `${this.baseUrl}/categorias/count`
+    return this.http.get<number>(url)
   }
 
   findById(id: String): Observable<Categoria>{
