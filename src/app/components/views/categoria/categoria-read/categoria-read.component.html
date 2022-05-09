@@ -5,8 +5,8 @@
     <div class="botaonovo">
         <button class="mat-elevation-z8" (click)="navegarParaCategoriaCreate()" mat-stroked-button color="primary">Nova Categoria</button>
     </div>
-    
-    <div class="mat-elevation-z8 content-table">
+       
+    <div *ngIf="!isShownLoading" class="mat-elevation-z8 content-table">
         <table class="table" mat-table [dataSource]="categorias">
       
             <!-- Position Column -->
@@ -56,11 +56,13 @@
           <div class="paginacao">
             <mat-paginator [length]="totalElements"
             (page)="nextPage($event)"
-            [pageSize]="5"
-            [pageSizeOptions]="[5, 10, 25, 100]"
-            aria-label="Select page">
+            [pageSize]="pageSize"
+            [pageIndex]="pageIndex"
+            [pageSizeOptions]="[5, 10, 25, 100]">
             </mat-paginator>
           </div>
     </div>
-    
+    <div *ngIf="isShownLoading" class="spinner">
+        <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
+    </div>
 </div>

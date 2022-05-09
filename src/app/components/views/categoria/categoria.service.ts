@@ -14,7 +14,7 @@ export class CategoriaService {
 
   constructor(private http: HttpClient, private _snack: MatSnackBar) { }
 
-  findAll(page: String, size: String):Observable<Categoria[]>{
+  findAll(page: number, size: number):Observable<Categoria[]>{
     const url = `${this.baseUrl}/categorias?page=${page}&size=${size}`
     return this.http.get<Categoria[]>(url)
   }

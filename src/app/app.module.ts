@@ -31,6 +31,8 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+
 
 import { CategoriaReadComponent } from './components/views/categoria/categoria-read/categoria-read.component';
 import { CategoriaCreateComponent } from './components/views/categoria/categoria-create/categoria-create.component';
@@ -68,7 +70,8 @@ import { CategoriaUpdateComponent } from './components/views/categoria/categoria
     FormsModule,
     MatInputModule,
     MatFormFieldModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatProgressSpinnerModule
   ],
   providers: [],
   bootstrap: [AppComponent]
