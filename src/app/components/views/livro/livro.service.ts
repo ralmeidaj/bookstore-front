@@ -13,9 +13,14 @@ export class LivroService {
 
   constructor(private http: HttpClient) { }
 
-  findAllByCategoria(id_cat: String): Observable<Livro[]>{
-      const url = `${this.baseUrl}/livros?categoria=${id_cat}`
+  findAllByCategoria(id_cat: String, page: number, size: number): Observable<Livro[]>{
+      const url = `${this.baseUrl}/livros?categoria=${id_cat}&page=${page}&size=${size}`
       console.log("url:"+url);
       return this.http.get<Livro[]>(url);
+  }
+
+  findAllCount(id_cat: String){
+    const url = `${this.baseUrl}/livros/allcount/${id_cat}`;
+    return this.http.get<number>(url);
   }
 }

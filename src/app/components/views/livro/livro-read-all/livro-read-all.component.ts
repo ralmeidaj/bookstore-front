@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { MatPaginatorIntl, PageEvent } from '@angular/material/paginator';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Livro } from '../livro.model';
 import { LivroService } from '../livro.service';
 
@@ -12,22 +13,69 @@ export class LivroReadAllComponent implements OnInit {
 
   displayedColumns: string[] = ['id', 'titulo', 'livros', 'acoes'];
 
-  id_cat2: String = "";
+  id_cat: String = "";
 
   livros: Livro[] = []
 
-  constructor(private service: LivroService, private route: ActivatedRoute) { }
+  totalElements: number = 0;
+  pageSize: number = 0;
+  pageIndex: number = 0;
+
+  isShownLoading: boolean = false;
+
+  constructor(private service: LivroService, private route: ActivatedRoute, private router: Router, private _MatPaginatorIntl: MatPaginatorIntl) { }
+
+
+  /* configuração da tradução da paginação*/
+  portugueseRangeLabel = (page: number, pageSize: number, length: number) => {
+    if (length === 0 || pageSize === 0) { return `0 de ${length}`; }
+
+    length = Math.max(length, 0);
+
+    const startIndex = page * pageSize;
+
+    const endIndex = startIndex < length ?
+        Math.min(startIndex + pageSize, length) :
+        startIndex + pageSize;
+
+    return `${startIndex + 1} - ${endIndex} de ${length}`;
+  };
 
   ngOnInit(): void {
-    this.id_cat2 = this.route.snapshot.paramMap.get("id_cat")!;
-    this.findAll();
+    /* configuração da tradução da paginação*/
+    this._MatPaginatorIntl.itemsPerPageLabel = 'Itens por Página';
+    this._MatPaginatorIntl.firstPageLabel = 'Primeira Página';
+    this._MatPaginatorIntl.lastPageLabel = 'Última Página';
+    this._MatPaginatorIntl.nextPageLabel = 'Próxima Página';
+    this._MatPaginatorIntl.previousPageLabel = 'Página Anterior'; 
+    this._MatPaginatorIntl.getRangeLabel = this.portugueseRangeLabel;
+    /*****************************************/
+    this.id_cat = this.route.snapshot.paramMap.get("id_cat")!;
+    this.findAll(0, 5);
   }
 
-  findAll(): void{
-    this.service.findAllByCategoria(this.id_cat2).subscribe((resposta) =>{
+  findAll(page: number, size: number): void{
+    this.service.findAllByCategoria(this.id_cat, page, size).subscribe((resposta) =>{
+      this.findAllCount();
       this.livros = resposta;
       console.log(resposta);
     });
+  }
+
+  findAllCount(){
+    //this.loading = true;
+    this.service.findAllCount(this.id_cat).subscribe(resposta => {
+      this.totalElements = resposta;
+      console.log("Count:" +  resposta);
+    })
+  }
+
+  nextPage(event: PageEvent){
+    //console.log(event);
+    this.pageSize = Number(event.pageSize.toString());
+    this.pageIndex = Number(event.pageIndex.toString());
+    
+    this.findAll(this.pageIndex, this.pageSize);
   }
 
 }

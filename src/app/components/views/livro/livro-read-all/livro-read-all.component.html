@@ -6,7 +6,7 @@
         <button class="mat-elevation-z8" mat-stroked-button color="primary">Novo Livro</button>
     </div>
        
-    <div class="mat-elevation-z8 content-table">
+    <div *ngIf="!isShownLoading" class="mat-elevation-z8 content-table">
         <table class="table" mat-table [dataSource]="livros">
       
             <!-- Position Column -->
@@ -47,21 +47,21 @@
             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
             <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
           </table>
-          <!--
+          
           <div class="paginacao">
             <mat-paginator [length]="totalElements"
             (page)="nextPage($event)"
             [pageSize]="pageSize"
             [pageIndex]="pageIndex"
-            [pageSizeOptions]="[5, 10, 25, 100]">
+            [pageSizeOptions]="[1, 10, 25, 100]">
             </mat-paginator>
           </div>
-        -->
+        
     </div>
-    <!--
+    
     <div *ngIf="isShownLoading" class="spinner">
         <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
     </div>
-    -->
+    
 </div>
 
