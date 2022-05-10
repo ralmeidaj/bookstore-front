@@ -56,16 +56,26 @@ export class CategoriaReadComponent implements OnInit {
     this.findAll(0, 5);
   }
 
-  findAll(page: number, size: number){
+  async findAll(page: number, size: number){
     this.isShownLoading = true;
+    //esperar
+    await this.sleep(1000);
     this.service.findAll(page, size).subscribe(resposta => {
       //console.log(resposta);
       this.findAllCount();
+      
       this.categorias = resposta;
       this.isShownLoading = false;
       this.totalElements = resposta.length
       console.log(this.totalElements)
     })
+  }
+
+  //esperar
+  sleep(ms: number) {
+    return new Promise((resolve) => {
+      setTimeout(resolve, ms);
+    });
   }
 
   findAllCount(){
@@ -81,7 +91,7 @@ export class CategoriaReadComponent implements OnInit {
   }
 
   nextPage(event: PageEvent){
-    console.log(event);
+    //console.log(event);
     this.pageSize = Number(event.pageSize.toString());
     this.pageIndex = Number(event.pageIndex.toString());
     
