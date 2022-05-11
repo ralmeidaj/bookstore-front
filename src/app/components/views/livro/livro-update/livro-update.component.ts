@@ -5,11 +5,11 @@ import { Livro } from '../livro.model';
 import { LivroService } from '../livro.service';
 
 @Component({
-  selector: 'app-livro-create',
-  templateUrl: './livro-create.component.html',
-  styleUrls: ['./livro-create.component.css']
+  selector: 'app-livro-update',
+  templateUrl: './livro-update.component.html',
+  styleUrls: ['./livro-update.component.css']
 })
-export class LivroCreateComponent implements OnInit {
+export class LivroUpdateComponent implements OnInit {
 
   livro: Livro =  {
     id: '',
@@ -33,6 +33,8 @@ export class LivroCreateComponent implements OnInit {
 
   ngOnInit(): void {
     this.id_cat = this.route.snapshot.paramMap.get("id_cat")!;
+    this.livro.id = this.route.snapshot.paramMap.get("id")!;
+    this.findById();
   }
 
   create():void{
@@ -42,6 +44,23 @@ export class LivroCreateComponent implements OnInit {
     },err =>{
       this.router.navigate([`categorias/${this.id_cat}/livros`])
       this.service.mensagem('Erro ao criar novo livro!')
+    }
+    )
+  }
+
+  findById(): void{
+    this.service.findById(this.livro.id!).subscribe((resposta => {
+      this.livro = resposta;
+    }))
+  }
+
+  update():void{
+    this.service.update(this.livro).subscribe((resposta)=>{
+      this.router.navigate([`categorias/${this.id_cat}/livros`])
+      this.service.mensagem('Livro alterado com sucesso!')
+    }, err =>{
+      this.router.navigate([`categorias/${this.id_cat}/livros`])
+      this.service.mensagem('Erro ao alterar o livro!')
     }
     )
   }
