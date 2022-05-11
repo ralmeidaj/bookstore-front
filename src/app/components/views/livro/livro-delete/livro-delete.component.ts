@@ -5,11 +5,11 @@ import { Livro } from '../livro.model';
 import { LivroService } from '../livro.service';
 
 @Component({
-  selector: 'app-livro-update',
-  templateUrl: './livro-update.component.html',
-  styleUrls: ['./livro-update.component.css']
+  selector: 'app-livro-delete',
+  templateUrl: './livro-delete.component.html',
+  styleUrls: ['./livro-delete.component.css']
 })
-export class LivroUpdateComponent implements OnInit {
+export class LivroDeleteComponent implements OnInit {
 
   livro: Livro =  {
     id: '',
@@ -20,11 +20,7 @@ export class LivroUpdateComponent implements OnInit {
   
   id_cat: String = ''
 
-  titulo = new FormControl('', [Validators.minLength(3)])
-  nome_autor = new FormControl('', [Validators.minLength(3)])
-  texto = new FormControl('', [Validators.minLength(3)])
-
-  constructor(
+   constructor(
     private service: LivroService,
     private route: ActivatedRoute,
     private router: Router,
@@ -54,18 +50,17 @@ export class LivroUpdateComponent implements OnInit {
     )
   }
 
-  getMessage(){
-    if(this.titulo.invalid){
-      return "O campo TITULO deve ser entre 3 e 100 caracter";
+  delete():void{
+    this.service.delete(this.livro.id!).subscribe((resposta) =>{
+      this.router.navigate([`categorias/${this.id_cat}/livros`])
+      this.service.mensagem('Livro excluido com sucesso!')
+    }, err =>{
+      this.router.navigate([`categorias/${this.id_cat}/livros`])
+      this.service.mensagem('Erro ao excluir o livro!')
     }
-    if(this.nome_autor.invalid){
-      return "O campo NOME DO AUTOR deve ser entre 3 e 100 caracter";
-    }
-    if(this.texto.invalid){
-      return "O campo TEXTO deve ser entre 10 e 2.000.000 caracter";
-    }
-    return false;
+    )
   }
+
   cancel():void {
     this.router.navigate([`categorias/${this.id_cat}/livros`])
   }
