@@ -78,4 +78,8 @@ export class LivroReadAllComponent implements OnInit {
     this.findAll(this.pageIndex, this.pageSize);
   }
 
+  nagegharParaCriarLivro():void{
+    this.router.navigate([`categorias/${this.id_cat}/livros/create`])
+  }
+
 }

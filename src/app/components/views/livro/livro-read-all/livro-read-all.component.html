@@ -3,7 +3,7 @@
         <h1>Livros</h1>
     </div>
     <div class="botaonovo">
-        <button class="mat-elevation-z8" mat-stroked-button color="primary">Novo Livro</button>
+        <button class="mat-elevation-z8" (click)="nagegharParaCriarLivro()" mat-stroked-button color="primary">Novo Livro</button>
     </div>
        
     <div *ngIf="!isShownLoading" class="mat-elevation-z8 content-table">
@@ -53,7 +53,7 @@
             (page)="nextPage($event)"
             [pageSize]="pageSize"
             [pageIndex]="pageIndex"
-            [pageSizeOptions]="[1, 10, 25, 100]">
+            [pageSizeOptions]="[5, 10, 25, 100]">
             </mat-paginator>
           </div>
         
