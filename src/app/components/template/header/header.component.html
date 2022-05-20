@@ -1,8 +1,15 @@
-<mat-toolbar class="header">
-    <span>
+<mat-toolbar>
+    <div class="titulo">
         <img src="assets/img/book.png" alt="">
-    </span>
-    <span>
-        <h1>APLICAÇÃO - LOJA DE LIVROS</h1>
-    </span>
-</mat-toolbar>
+    </div>
+    <div class="titulo">
+        LOJA DE LIVROS
+    </div>
+    <span class="example-spacer"></span>
+    <button routerLink="/sigin" mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon" title="Registrar">
+      <mat-icon>person_add</mat-icon>
+    </button>
+    <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
+      <a href="">Login</a>
+    </button>
+  </mat-toolbar>

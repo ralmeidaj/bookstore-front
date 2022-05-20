@@ -5,7 +5,7 @@ img{
     justify-content: center;
     height: 10%;
 }
-span{
+.titulo{
     display: flex;
     align-items: center;
 }
@@ -13,3 +13,13 @@ h1{
     padding-left: 1.2rem;
     font-size: 1.5rem;
 }
+
+.sig{
+    color: crimson;
+    padding: 1rem;
+    
+}
+
+.example-spacer {
+    flex: 1 1 auto;
+  }
