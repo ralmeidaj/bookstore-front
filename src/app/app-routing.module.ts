@@ -11,10 +11,15 @@ import { LivroReadAllComponent } from './components/views/livro/livro-read-all/l
 import { LivroReadComponent } from './components/views/livro/livro-read/livro-read.component';
 import { LivroUpdateComponent } from './components/views/livro/livro-update/livro-update.component';
 import { UsuarioSigninComponent } from './components/views/usuario/usuario-signin/usuario-signin.component';
+import { UsuarioSignupComponent } from './components/views/usuario/usuario-signup/usuario-signup.component';
 
 const routes: Routes = [
   {
     path: '',
+    component: UsuarioSignupComponent
+  },
+  {
+    path: 'home',
     component: HomeComponent
   },
   {

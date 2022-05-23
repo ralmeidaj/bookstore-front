@@ -27,6 +27,8 @@ import {MatPaginatorModule} from '@angular/material/paginator';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 import {MatInputModule} from '@angular/material/input';
+
+
 import {MatFormFieldModule} from '@angular/material/form-field';
 
 import {MatSnackBarModule} from '@angular/material/snack-bar';
@@ -44,6 +46,7 @@ import { LivroUpdateComponent } from './components/views/livro/livro-update/livr
 import { LivroDeleteComponent } from './components/views/livro/livro-delete/livro-delete.component';
 import { LivroReadComponent } from './components/views/livro/livro-read/livro-read.component';
 import { UsuarioSigninComponent } from './components/views/usuario/usuario-signin/usuario-signin.component';
+import { UsuarioSignupComponent } from './components/views/usuario/usuario-signup/usuario-signup.component';
 
 
 
@@ -64,7 +67,8 @@ import { UsuarioSigninComponent } from './components/views/usuario/usuario-signi
     LivroUpdateComponent,
     LivroDeleteComponent,
     LivroReadComponent,
-    UsuarioSigninComponent
+    UsuarioSigninComponent,
+    UsuarioSignupComponent
   ],
   imports: [
     BrowserModule,

@@ -11,7 +11,7 @@ import { Categoria } from './categoria-read/categoria.model';
 export class CategoriaService {
 
   baseUrl: String = environment.baseUrl;
-  auth_token: String = "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJtb2QiLCJpYXQiOjE2NTMwNjk5MzcsImV4cCI6MTY1MzE1NjMzN30.St0nLo2JgUzSesdwDsBvPJ4ee0TbW8AYtuj5kmygrUeIPhUwhZ66eQtnimAGt8l582ywbTSYMLUhA6m1nTZVng";
+  auth_token: String = "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJtb2QiLCJpYXQiOjE2NTMzMzMxNzYsImV4cCI6MTY1MzQxOTU3Nn0.7QzYW3RTFEUq0cTI2AB8wj9EWb3mBeLM75WlMryRupkH7k2diq4ifl4RkS2qX-lnfPF-U_MLTAiGP_fL-lwYFw";
 
   headers = new HttpHeaders({
     'Content-Type': 'application/json',

@@ -1,0 +1,35 @@
+<mat-card class="sigin mat-elevation-z4" >
+    <mat-card-title class="title">Login</mat-card-title>
+    <mat-card class="subtitle">Preencha todos os dados para efetuar o login
+     <div class="campos">
+            <form >
+                <mat-form-field class="example-full-width" appearance="fill">
+                    <mat-label>Informe seu UserName</mat-label>
+                    <input matInput [(ngModel)]="usuario.username" required [formControl]="usernameFormControl" placeholder="Ex. raimundo.araujo" value="">
+                    <mat-error *ngIf="usernameFormControl.hasError('required')">
+                        Username é  <strong>requerido</strong>
+                      </mat-error>
+                </mat-form-field>
+                
+                <mat-form-field class="example-full-width" appearance="fill">
+                <mat-label>Informe seu Password</mat-label>
+                <input matInput [(ngModel)]="usuario.password" [formControl]="passwordFormControl" [type]="hide ? 'password' : 'text'">
+                <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                    <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                </button>
+                <mat-error *ngIf="passwordFormControl.hasError('required')">
+                    Password é  <strong>requerido</strong>
+                  </mat-error>
+                </mat-form-field>
+
+                 
+                    <button  (click)="logar()"class="example-full-width mat-elevation-z8"  mat-stroked-button color="primary">Logar</button>
+                    
+              
+            </form>
+    </div>
+        
+    </mat-card>
+    
+</mat-card>
+
