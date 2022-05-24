@@ -4,6 +4,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Usuario } from './usuario-signin/usuario.model';
+import { JwtResponse } from './usuario-signup/jwtresponse.model';
 import { UsuarioLogin } from './usuario-signup/usuarioLogin.model';
 
 @Injectable({
@@ -20,7 +21,11 @@ export class UsuarioService {
     return this.http.post<Usuario>(url, usuario);
   }
 
-  logar(usuarioLogin: UsuarioLogin): Observable<
+  logar(usuarioLogin: UsuarioLogin): Observable<JwtResponse>{
+    const url = `${this.baseUrl}/auth/logar`;
+    return this.http.post<JwtResponse>(url, usuarioLogin);
+  }
+  
   mensagem(str: String): void {
     this._snack.open(`${str}`, 'OK', {
       horizontalPosition: 'end',

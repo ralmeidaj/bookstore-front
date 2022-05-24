@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatPaginatorIntl, PageEvent } from '@angular/material/paginator';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { CategoriaService } from '../categoria.service';
 import { Categoria } from './categoria.model';
@@ -40,7 +41,7 @@ export class CategoriaReadComponent implements OnInit {
     return `${startIndex + 1} - ${endIndex} de ${length}`;
   };
   
-  constructor(private service: CategoriaService, private router: Router, private _MatPaginatorIntl: MatPaginatorIntl ) { }
+  constructor(private service: CategoriaService, private router: Router, private _MatPaginatorIntl: MatPaginatorIntl, private snack: MatSnackBar ) { }
 
   //constructor(private service: CategoriaService, private router: Router ) { }
 
@@ -58,17 +59,22 @@ export class CategoriaReadComponent implements OnInit {
 
   async findAll(page: number, size: number){
     this.isShownLoading = true;
+
+    //console.log("aqui...")
     //esperar
     await this.sleep(1000);
     this.service.findAll(page, size).subscribe(resposta => {
-      //console.log(resposta);
       this.findAllCount();
-      
       this.categorias = resposta;
       this.isShownLoading = false;
       this.totalElements = resposta.length
-      console.log(this.totalElements)
-    })
+      //console.log(this.totalElements)
+    }, err =>{
+      this.service.mensagem(err.error.message);
+      this.router.navigate([""])
+      console.log(err.error.message);
+    }
+    )
   }
 
   //esperar

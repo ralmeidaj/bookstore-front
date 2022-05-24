@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { LocalStorageService } from '../../local-storage.service';
 
 @Component({
   selector: 'app-header',
@@ -7,9 +8,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor() { }
+  username : string = "";
+  isShowLogin: boolean = false;
+  constructor(private localStore: LocalStorageService) { }
 
   ngOnInit(): void {
+    console.log("veio até aqui..")
+    if(this.localStore.get("usuarioSession")){
+      this.username = this.localStore.get("usuarioSession").username;
+      this.isShowLogin = true;
+    }
+  }
+
+  getUserName(): string{
+    return this.username;
   }
 
 }

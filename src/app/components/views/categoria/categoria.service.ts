@@ -1,8 +1,10 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { Observable } from 'rxjs';
+import { EMPTY, Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { LocalStorageService } from '../../local-storage.service';
+import { JwtResponse } from '../usuario/usuario-signup/jwtresponse.model';
 import { Categoria } from './categoria-read/categoria.model';
 
 @Injectable({
@@ -11,25 +13,62 @@ import { Categoria } from './categoria-read/categoria.model';
 export class CategoriaService {
 
   baseUrl: String = environment.baseUrl;
-  auth_token: String = "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJtb2QiLCJpYXQiOjE2NTMzMzMxNzYsImV4cCI6MTY1MzQxOTU3Nn0.7QzYW3RTFEUq0cTI2AB8wj9EWb3mBeLM75WlMryRupkH7k2diq4ifl4RkS2qX-lnfPF-U_MLTAiGP_fL-lwYFw";
+  auth_token: string = "";
+  auth_type_token = "";
 
-  headers = new HttpHeaders({
+  /*headers = new HttpHeaders({
     'Content-Type': 'application/json',
     'Authorization': `Bearer ${this.auth_token}`
-  })
+  })*/
 
-  constructor(private http: HttpClient, private _snack: MatSnackBar) { }
+  JwtResponse: JwtResponse = {
+      id: "",
+      username: "",
+      email: "",
+      roles: [""],
+      tokenType: "",
+      accessToken: ""
+  }
+
+  constructor(private http: HttpClient, private _snack: MatSnackBar, private localStorage: LocalStorageService) { }
 
   findAll(page: number, size: number):Observable<Categoria[]>{
-    
-    const url = `${this.baseUrl}/categorias?page=${page}&size=${size}`
-    //return this.http.get<Categoria[]>(url)
-    return this.http.get<Categoria[]>(url, { headers: this.headers });
+    //this.localStorage.clean();
+
+    if (this.localStorage.get('usuarioSession')){
+            
+      this.JwtResponse  = this.localStorage.get('usuarioSession');
+    }
+      const headers = new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${this.JwtResponse.accessToken}`
+      })
+
+      const url = `${this.baseUrl}/categorias?page=${page}&size=${size}`
+
+      return this.http.get<Categoria[]>(url, { headers: headers });
+    //}
+    //console.log("não tem usuário")
+    //return EMPTY;
   }
 
   findAllCount(){
-    const url = `${this.baseUrl}/categorias/count`
-    return this.http.get<number>(url, { headers: this.headers })
+    if (this.localStorage.get('usuarioSession')){
+      const url = `${this.baseUrl}/categorias/count`
+      this.JwtResponse  = this.localStorage.get('usuarioSession');
+
+      const headers = new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${this.JwtResponse.accessToken}`
+      })
+
+     // console.log(headers)
+
+      return this.http.get<number>(url, { headers: headers })
+    }
+    console.log("não tem usuário")
+    return EMPTY;
+
   }
 
   findById(id: String): Observable<Categoria>{

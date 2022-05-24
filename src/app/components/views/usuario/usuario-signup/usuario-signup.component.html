@@ -5,7 +5,7 @@
             <form >
                 <mat-form-field class="example-full-width" appearance="fill">
                     <mat-label>Informe seu UserName</mat-label>
-                    <input matInput [(ngModel)]="usuario.username" required [formControl]="usernameFormControl" placeholder="Ex. raimundo.araujo" value="">
+                    <input matInput [(ngModel)]="usuarioLogin.username" required [formControl]="usernameFormControl" placeholder="Ex. raimundo.araujo" value="">
                     <mat-error *ngIf="usernameFormControl.hasError('required')">
                         Username é  <strong>requerido</strong>
                       </mat-error>
@@ -13,7 +13,7 @@
                 
                 <mat-form-field class="example-full-width" appearance="fill">
                 <mat-label>Informe seu Password</mat-label>
-                <input matInput [(ngModel)]="usuario.password" [formControl]="passwordFormControl" [type]="hide ? 'password' : 'text'">
+                <input matInput [(ngModel)]="usuarioLogin.password" [formControl]="passwordFormControl" [type]="hide ? 'password' : 'text'">
                 <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
                     <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
                 </button>
@@ -22,9 +22,9 @@
                   </mat-error>
                 </mat-form-field>
 
-                 
-                    <button  (click)="logar()"class="example-full-width mat-elevation-z8"  mat-stroked-button color="primary">Logar</button>
-                    
+                 <div class="botao">
+                    <button  (click)="logar()"class="mat-elevation-z8"  mat-stroked-button color="primary">Entrar</button>
+                </div>    
               
             </form>
     </div>

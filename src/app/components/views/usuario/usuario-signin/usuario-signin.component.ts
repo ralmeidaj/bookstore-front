@@ -37,7 +37,7 @@ export class UsuarioSigninComponent implements OnInit {
   matcher = new ErrorStateMatcher();
 
   roleformcontrols = new FormControl();
-  roleList: string[] = ["mod", "user"];
+  roleList: string[] = ["mod", "user", "admin"];
 
   constructor(private usuarioService: UsuarioService, private router: Router) {}
 

@@ -6,10 +6,11 @@
         LOJA DE LIVROS
     </div>
     <span class="example-spacer"></span>
-    <button routerLink="/sigin" mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon" title="Registrar">
+    <button routerLink="/registrar" mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon" title="Registrar">
       <mat-icon>person_add</mat-icon>
     </button>
-    <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
+    <div *ngIf="isShowLogin">User: {{ getUserName() }}</div>
+    <button *ngIf="!isShowLogin" mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
       <a href="">Login</a>
     </button>
   </mat-toolbar>

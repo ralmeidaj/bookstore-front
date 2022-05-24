@@ -59,7 +59,7 @@ const routes: Routes = [
     component: LivroReadComponent
   },
   {
-    path: 'sigin',
+    path: 'registrar',
     component: UsuarioSigninComponent
   }
   

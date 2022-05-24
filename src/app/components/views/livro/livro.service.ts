@@ -16,7 +16,7 @@ export class LivroService {
 
   findAllByCategoria(id_cat: String, page: number, size: number): Observable<Livro[]>{
       const url = `${this.baseUrl}/livros?categoria=${id_cat}&page=${page}&size=${size}`
-      console.log("url:"+url);
+      console.log("url:" + url);
       return this.http.get<Livro[]>(url);
   }
 

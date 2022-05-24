@@ -40,3 +40,7 @@ input.example-right-align {
 .mat-select-role{
     width: 80;
 }
+.botao{
+    width: 100%;
+    text-align: center;
+}
